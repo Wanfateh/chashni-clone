@@ -1,0 +1,51 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container d-flex my-5 justify-content-center product-div">
+    <a href="">Home </a><span class="mx-2"> / </span><a href="">Shop</a><span class="mx-2"> / </span><a href="">Canned Sweets</a><span class="mx-2"> / </span><a href="">Royal Gulab Jamun</a>
+</div>
+{% if product %}
+    <!-- <div class="container"> -->
+        <div class="container d-flex">
+            <div class="col-md-2  p-0">
+                <div class="mb-2 side-img d-flex" ><img src="{{ product.image.url }}" class="ms-5" height="100%" width="100%"></div class="mb-2">
+                <div class="mb-2 side-img d-flex" ><img src="{{ product.image.url }}" class="ms-5" height="100%" width="100%"></div class="mb-2">
+                <div class="mb-2 side-img d-flex" ><img src="{{ product.image.url }}" class="ms-5" height="100%" width="100%"></div class="mb-2">
+                <div class="side-img"></div>
+                <div class="side-img"></div>
+
+            </div>
+        
+            <div class="col-md-4 me-5 p-0  img">
+                <!-- <img class="img-fluid" src="https://via.placeholder.com/750x500" alt=""> -->
+                <img src="{{ product.image.url }}" alt="Royal Gulab Jaman" class="img-fluid " width="100%" height="100%" style="display: block; visibility: unset;">
+            </div>
+        
+            <div class="col-md-6">
+                <h3 class="my-3">{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <h5 class="my-2">Brand</h5>
+                <p>Canned Items</p>
+                <h5 class="my-2">Category</h5>
+                <p>{{ product.category }}</p>
+                <h5 class="my-2">Weight</h5>
+                <h3 class="detail-price">{{ product.price }}</h3>
+                <form action="{% url 'cart' %}" class="mb-5" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <div class="wrap d-flex align-items-center qty-div">
+                        <button type="button" id="btn_minus" class="qty-btns"><i class="fa-solid fa-minus"></i></button>
+                        <input type="text" class="qty-btns qty-input" name="qty" id="qty" value="1">
+                        <button type="button"  id="btn_plus" class="qty-btns"><i class="fa-solid fa-plus"></i></button>
+                        
+                        <button type="submit" class="btn submit-btn my-items mx-3">Add to Cart</button>
+                    </div>
+                </form>
+                
+            </div>
+      
+        </div>
+{% endif %}    
+{% endblock %}

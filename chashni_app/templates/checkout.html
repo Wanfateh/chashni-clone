@@ -1,0 +1,343 @@
+{% extends 'template.html' %}
+{% load static %}
+
+
+
+
+
+
+
+
+{% block content %}
+
+  <!-- <div class="header_ticker py-1" style="background: #9C090F;color: #FFFFFF;text-align: center;font-weight: bold;font-size: 12px;z-index: 11111111111111111;">Orders placed after 7:00 PM will be processed the next day. </div> -->
+       
+    <div class="container mt-5 d-flex justify-content-between">
+        <div class="">
+            <a class="navbar-brand" href="#"></a>
+        </div>
+     
+        
+        <div class="nav-item ms-1">
+            <a class="nav-link" href="#"><b class="check-size">Checkout</b><span class="checkout-span"> (3 items)</span></a>
+        </div>
+    </div>
+<div class="check-div mt-4">
+
+<div class="container   ">
+
+    <div class="checkout_page_section py-3">
+        <div class="checkout_custom_container">
+            <form name="feedback" method="post" action="{% url 'checkout' %}" id="placeorder" novalidate="novalidate">
+
+                {% csrf_token %}
+                <input type="hidden" name="order_amount" id="delivery_type_bit" value="{{ grand_total}}">
+                <input type="hidden" name="time_slot_check" id="time_slot_check" value="0">
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                <div class="checkout_page_box">
+                    <!-- checkout details section start  -->
+                    <div class="checkout_page_box_one">
+                        <input type="hidden" name="email" value="">
+                        <!-- <input type="hidden" name="rid" value="12201">
+                        <input type="hidden" class="cs-grand-total" name="grandtotal" value="3085">
+                        <input type="hidden" name="loyalty_points" id="input_loyalty_points" value="">
+                        <input type="hidden" name="loyalty_amount" id="input_loyalty_amount" value=""> -->
+                        <div class="checkout_page_box_heading_section">
+                            <div class="mt-4">
+                                <h1 class="mt-4">Checkout</h1>
+                            </div>
+                      
+                        </div>
+    
+                        <div class="check_out_verification_steps_main" id="check_out_verification_steps_main">
+                            <div class="check_out_verification_steps">
+                                <div class="check_out_shipping_method_box">
+                                    <div class="check_out_verification_steps_heading">
+                                        <h5>Choose Shipping Method</h5>
+                                    </div>
+                                    <div class="check_out_shipping_method_btns">
+                                      <input type="radio" name="delivery_method">Delivery
+                                      <input type="radio"  name="delivery_method">Pickup
+                                     </div>
+                                    <input type="hidden" name="ordertype" value="delivery" class="cs-order-type">
+                                    <div id="shipping_notes">
+
+                                    </div>
+                                </div>
+                                <div class="checkout-combine-screens">
+                                     <div class="check_out_delivery_detail_box" id="type_delevery_address" style="display: block;">
+    
+                                            <div class="check_out_delivery_form_box">
+                                                <div class="check_out_shipping_method_box_delivery_fields_heading">
+                                                    <h5>Delivery Details</h5>
+                                                </div>
+                                                <div class="check_out_delivery_form_content">
+                                                    <div class="check_out_delivery_form_fields_single_box">
+                                                                <div class="check_out_delivery_form_fields has-danger login-input">
+                                                                    <span>Email*</span>
+                                                                    {{ form.email }}
+                                                                    <!-- <input value="" name="user_email" id="user_email" type="email" placeholder="Enter your email address" class="is-invalid"> -->
+                                                                </div>
+                                                                <label for="user_email" class="error" id="user_email_error">
+                                                                    <!--error message here-->
+                                                                </label>
+                                                            </div>
+                                                            <div class="check_out_delivery_form_fields_box">
+                                                        <div class="check_out_delivery_form_fields_single_box">
+                                                            <div class="check_out_delivery_form_fields has-danger login-input">
+                                                                <span>Full name*</span>
+                                                                {{ form.full_name }}
+                                                                <!-- <input value="" name="full_name" id="customer_name" type="text" placeholder="Enter your full name" class="is-invalid"> -->
+                                                            </div>
+                                                            <label for="customer_name" generated="true" id="customer_name_error" class="error">* Please provide your Full Name</label>
+                                                        </div>
+                                                        <div class="check_out_delivery_form_fields_single_box">
+                                                            <div class="check_out_delivery_form_fields has-danger login-input">
+                                                                <span>Contact no.*</span>
+                                                                {{ form.phone }}
+                                                                <!-- <input class="" name="phone" value="" type="text" id="phone_number" placeholder="Your contact number" required=""> -->
+                                                            </div>
+                                                            <label for="phone_number" generated="true" id="phone_number_error" class="error">* Please provide your Mobile number</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="check_out_delivery_form_fields_single_box">
+                                                            <div class="check_out_delivery_form_fields has-danger login-input">
+                                                                <span class="cs-label">Full Address*</span>
+                                                                <!-- <textarea value="" name="address" cols="20" rows="3" type="text" id="delivery-address" placeholder="Write your complete address....." class="is-invalid"> -->
+                                                                    {{ form.address }}
+                                                                </textarea><label for="delivery-address" generated="true" class="error"></label>
+                                                            </div>
+                                                            <label for="address" class="error" id="delivery-address_error" style="display: none;">
+                                                                <!--error message here-->
+                                                            </label>
+    
+                                                        </div>
+                                                        <div class="check_out_delivery_form_fields_box">
+                                                                                                                                                                                        
+                                                                                                                                                                                                            
+    
+                                                                        <div class="check_out_delivery_form_fields_single_box check_out_delivery_form_fields_city ">
+                                                                            <div class="check_out_delivery_form_fields login-input">
+                                                                                <span class="cs-label">Select City</span>
+                                                                                <select class="city delivery-city valid" name="city">
+                                                                                    <option value="">Select 
+                                                                                        City</option>
+                                                                                    <option value="Lahore" selected="Lahore">Lahore</option>
+                                                                                    <option value="Lahore" selected="">{{ form.city }}
+
+                                                                                </select>
+                                                                            </div>
+                                                                            <label for="city" class="error" id="delivery-city_error"></label>
+                                                                        </div>
+                                                                    </div>
+    
+                                                        <div class="check_out_delivery_form_fields_single_box">
+                                                        <div class="check_out_delivery_form_fields login-input">
+                                                            <span>Special Instructions(Optional)</span>
+                                                            <!-- <textarea name="order_note" cols="20" rows="1" type="text" placeholder="Write your message here....."> -->
+                                                                {{ form.instructions }}
+                                                            </textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                            </div>
+                            <!--  -->
+                            <!-- <div class="check_out_varfication_navigation_btns">
+                                <a href="/show/cart" class="check_out_return_cart_btn" id="check_out_return_cart_btn"><i class="far fa-angle-left"></i>Return to Cart</a>
+                                <a class="check_out_continue_payment_btn" rel='3085' id="check_out_continue_payment_btn">Continue to Payment</a>
+                            </div> -->
+                            <!--  -->
+                        </div>
+    
+                        <div class="check_out_payment_method_main_section" id="check_out_payment_method_main_section">
+                            <div class="check_out_payment_method_box">
+                                    <div class="check_out_payment_method_heading">
+                                        <h2>Payment Details</h2>
+                                    </div>
+                                    <div class="check_out_payment_card_type_two">
+                                        <div class="checkout-payment-optoins-parent">
+                                            <div class="checkout-payment-optoins">
+                                                            <input id="cash_on_delivery_check" class="payment_gateway_new" type="radio" name="payment_mod" value="Cash On Delivery" checked="">
+                                                            <div class="checkout-payment-optoins-text">
+                                                            <span id="cash-on-delivery">
+                                                                Pay On Delivery</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkout-payment-optoins">
+                                                            <input id="payment_gateway_alfalah" class="payment_gateway_new" type="radio" name="payment_mod" value="Bank Alfalah">
+                                                            <div class="checkout-payment-optoins-text">
+                                                                <span>Pay Online ( Credit/Debit )</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkout-payment-optoins">
+                                                            <input id="payment_gateway" class="payment_gateway_new" type="radio" name="payment_mod" value="Jazz Cash">
+                                                            <div class="checkout-payment-optoins-text">
+                                                                <span>Pay Via Jazzcash</span>
+                                                            </div>
+                                                        </div>
+                                                     </div>
+    
+                                            </div>
+                                        </div>
+                            
+                                                                                                    
+                                <div class="check_out_desktop_captcha">
+                     
+                                 </div>
+                            <div class="check_out_varfication_navigation_btns">
+                                <a class="btn btn-cart" id="check_out_return_to_shipping" href="{% url 'show_cart' %}"> Return to Cart</a>
+                                <div class="shopping_cart_total_bill_proceeding_btn ">                             
+                                            <div class="pay-button my-4">
+                                                <button type="submit" id="place_order_submit_btn " class="btn btn-cart">Order Now</button>
+                                            </div>
+                                        </div>
+    
+                               
+                            </div>
+    
+                        </div>
+                        
+                        <!-- <input type="hidden" name="loyalty_discount_points" id="loyalty_discount_points" value="">
+                        <input type="hidden" name="loyalty_discount_amount" id="loyalty_discount_amount" value="">
+                        <input type="hidden" name="loyalty_voucher" id="loyalty_voucher" value="">
+                        <input type="hidden" name="loyalty_voucher_discount" id="loyalty_voucher_discount" value=""> -->
+                    </div>
+                    <!-- checkout details section End  -->
+    
+                    <!-- Cart bill Summary section start -->
+                    <div class="checkout_page_box_two ">
+ 
+                        <div class="checkout_order_detail_box">
+            
+    
+                            <div class="checkout_order_detail accordion" id="accordionExample">
+                            
+                                <!-- <div class="checkout_order_detail_header" id="checkoutOrderDetail">
+                                    <button class="checkout_order_detail_toggle_btn" type="button" data-toggle="collapse" data-target="#checkoutOrderDetailColapse" aria-expanded="true" aria-controls="checkoutOrderDetailColapse">
+                                        Order Details <i class="fas fa-angle-down"></i>
+                                    </button>
+                                </div> -->
+                            
+                                <div class="checkout_order_detail_header pt-4 px-3">
+                                   <h5>Order Details</h5>
+                                        
+                                    </button>
+                                </div>
+                            
+                                <!-- <div id="checkoutOrderDetailColapse" class="collapse" aria-labelledby="checkoutOrderDetail" data-parent="#accordionExample"> -->
+                            
+                                <div id="checkoutOrderDetailColapse">
+                                        
+                                            <div class="checkout_order_detail_main">
+                            
+                                                <div class="checkout_order_detail_list  ">
+                                                    {% if cart_items %}
+                                                        {% for cart in cart_items %}
+                                                            <div class="checkout_order_detail_single_list d-flex ">
+                                                                <div class="checkout_order_detail_single_list_detail  d-flex">
+                                                                    <figure>
+                                                                        <img src="{{ cart.product.image.url }}"  height="40px" width="40px" alt="Image">
+                                                                        <!-- <span class="review_order_res_httpsqty">1</span> -->
+                                                                    </figure>
+                                                                    <div class="checkout_order_detail_single_list_des mx-1">
+                                                                        <div class="checkout_order_detail_single_list_name">
+                                                                            <p>{{ cart.product.name }}</p>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="checkout_order_detail_single_list_price mx-1">
+                                                                      <p>
+                                                                        <small class="cart-span"> PKR </small> <span>{{ cart.product.price }}                                                                    </span>    
+                                                                    </p>                                           
+                                                                         <!--
+                                                                        <h6></h6>
+                                                                    -->                                       
+                                                                </div>
+                                                            </div>
+                                                        {% endfor%}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+    
+                        <div class="cart-total check-total">
+                            <h5>Cart Summary</h5>
+                            
+                            <div class="d-flex justify-content-between ps-1">
+                                <input type="hidden">
+                                <p>Subtotal<span class="cart-span"> item 1</span></p>
+                                <span class="cart-span">
+                                PKR <span>{{ grand_total }}</span>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between ps-1">
+                                <input type="hidden">
+                                <p>Delivery Charges</p>
+                                <span class="cart-span">
+                                PKR <span>0</span>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between ps-1">
+                                <input type="hidden">
+                                <p>GST<span class=""> 0%</span></p>
+                                <span class="cart-span">
+                                PKR <span>0</span>
+                                </span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between ps-1">
+                                <input type="hidden">
+                                <p>Applicable taxes and fee will be calculated before finalizing checkout</p>
+                                <span>
+                                    
+                                </span>
+                            </div>
+            <hr>
+                            <div class="d-flex justify-content-between ps-1">
+                                <input type="hidden">
+                                <p>Grand Total:</p>
+                                <span class="cart-span">
+                                PKR<span>{{ grand_total }}</span>
+                                </span>
+                            </div>
+                            
+                           <!--   <button type="submit" class=" sbmit  disabled "  disabled  rel='' id="place-order-button">Pay Now</button>
+                                    <button type="submit" class=" sbmit  disabled "  disabled  rel='' id="place-order-button">Order Now</button>
+                                                                    -->                                
+                            <!-- <div class="pay-button ">
+                                <button type="submit" id="place_order_submit_btn " class="btn btn-cart">Order Now</button>
+                            </div>
+                         -->
+                            <!-- <a href="javascript:void();" onClick="minimum_order();" rel='' id="place-order-button">Proceed to checkout</a> -->
+                            <!-- <a href="javascript:void();" onClick="minimum_order();" rel='' id="place-order-button">Proceed to checkout</a> -->
+                        </div>
+                        <!-- <div class="check_out_varfication_navigation_btns_responsive">
+                            <a href="/show/cart" class="check_out_return_cart_btn" id="check_out_return_cart_btn"><i class="far fa-angle-left"></i>Return to Cart</a>
+                        </div> -->
+                                                        
+                               
+            </div>
+        </div>
+    
+                </div>
+                    
+                    <!-- Cart bill Summary section End -->
+                </div></form>
+            
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% include '_footer.html'%}
+
+<!-- {% endblock %} -->

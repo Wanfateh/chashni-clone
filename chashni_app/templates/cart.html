@@ -1,0 +1,114 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+
+    <div class="d-flex mt-4">
+        <div class="">
+            
+        <h1 class="">Shopping Cart</h1>
+
+            
+        <!-- <h1>Shopping Cart</h1> -->
+        <br>
+
+            <table class="table table-striped-rows ps-5 ">
+                <thead>
+                <tr>
+                    <th class="table-head" scope="col">Product</th>
+                    <th class="table-head" scope="col">Description</th>
+                    <th class="table-head" scope="col">Price</th>
+                    <th class="table-head" scope="col">Quantity</th>
+                    <th class="table-head" scope="col">Subtotal</th>
+                    <th class="table-head" scope="col">Action</th>
+
+                    
+                </tr>
+                
+                </thead>
+
+                <tbody>
+               {% if cart_items %}
+                    {% for cart in cart_items %}
+                        <tr>
+                            <td scope="row">
+                                <img src="{{ cart.product.image.url }}" height="50px" width="50px"></th>
+                            <td> $ {{ cart.product.description }} </td>
+                            <td>  {{cart.product.price }}  </td>
+                            <!-- <td> <input type="number" class="inp1 displayblock" ></td> -->
+                            <td>   {{ cart.qty }} </td>
+                            <td> $ {{ cart.sub_total}} </td>
+
+                            <td><a href=" {% url 'delete' cart.id %}"><i class="fa-solid fa-trash"></i></a></td>
+
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <br>
+           
+            <br>
+            <br>
+
+                <div class="d-flex justify-content-between">
+                    <!-- <div class="d-flex">
+                    <input type="text" name="coupon-code" id="coupon-code" placeholder="Coupon Code" class="coupon-code displayblock">
+                    <Button type="submit" name="coupon-code" value="coupon-code" class="btn-cart">Apply Coupon</Button>
+                    </div> -->
+            
+                            
+                <div class="cart-total">
+                        <h5>Cart Summary</h5>
+                
+                        <div class="d-flex justify-content-between ps-1">
+                            <input type="hidden">
+                            <p>Subtotal<span class="cart-span"> item {{ qty }}</span></p>
+                         
+                            <span class="cart-span">
+                            PKR <span>{{ grand_total }}</span>
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-between ps-1">
+                            <input type="hidden">
+                            <p>GST<span class=""> 0%</span></p>
+                            <span class="cart-span">
+                            PKR <span>{{ grand_total }}</span>
+                            </span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between ps-1">
+                            <input type="hidden">
+                            <p>Applicable taxes and fee will be calculated before finalizing checkout:</p>
+                            <span>
+                                
+                            </span>
+                        </div>
+        <hr>
+                        <div class="d-flex justify-content-between ps-1">
+                            <input type="hidden">
+                            <p>Grand Total:</p>
+                            <span class="cart-span">
+                            PKR<span>{{ grand_total }}</span>
+                            </span>
+                        </div>
+                  
+                        <div class=" d-flex justify-content-center"><a href="{% url 'checkout' %}"> <button type="button" class="btn-cart"> Process to checkout</button></a>  </div>
+                    </div>  
+
+            </div>
+      </div>
+      <div class="d-flex justify-content-between mb-4">
+        <div >
+            <a href="{% url 'shop' %}"><button type="submit" class="rts" >Continue Shopping </button></a>
+        </div>
+        <!-- <div >
+            <input type="submit" value="Update Cart" class="rts1">
+        </div> -->
+    </div>
+    </div>
+    
+{% endblock %}

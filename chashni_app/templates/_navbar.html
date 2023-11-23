@@ -1,0 +1,134 @@
+{% load static %}
+<div class="header_ticker py-1" style="background: #9C090F;color: #FFFFFF;text-align: center;font-weight: bold;font-size: 12px;z-index: 11111111111111111;">Orders placed after 7:00 PM will be processed the next day. </div>
+<header>
+    <div class="px-3  header_div">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center my-1 my-lg-0 me-lg-auto text-white text-decoration-none ">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            <span class="nav_a">PAKISTAN'S FAVOURITE MITHAI              CRAFTED FOR THE ART OF GIFTING</span>
+        </a>
+
+        <ul class="nav col-12 col-lg-auto  justify-content-center my-md-0 text-small">
+            <li>
+            <a href="#" class="nav-link text-white py-1">
+                Locations
+            </a>
+            </li>
+            <li>
+            <a href="#" class="nav-link text-white py-1">
+                Contact us
+            </a>
+            </li>
+            <li>
+            <a href="#" class="nav-link text-white py-1">
+                Lahore
+            </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+    </div>
+</header>
+<div class="container mt-3 d-flex">
+<div class="">
+    <a class="navbar-brand" href="{% url 'home' %}"><img width="90px" src="https://static.tossdown.com/site/c077a44a-2de2-45b3-9fb1-ac111d0f878d.svg" alt="http://placehold.it/150x50?text=Logo" class="web-logo"></a>
+</div>
+
+<div>
+    <div class="px-3 mb-2">
+        <div class="container d-flex flex-wrap justify-content-center">
+        <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+            <!-- <input type="search" class="form-control" placeholder="Search..." aria-label="Search"> -->
+        </div>
+
+        <div class="text-end d-flex">
+        
+            <form class="d-flex me-2" role="search">
+                <input class=" nav-search" type="search" placeholder="Search items here" aria-label="Search">
+                <button class="btn nav-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <a href="#" class="mb-lg-0 me-lg-auto"><i class="fa-brands fa-square-facebook font_icon me-2"></i></a>
+            <a href="#" class="mb-2 mb-lg-0 me-lg-auto "><i class="fa-brands fa-square-instagram font_icon"></i></a>
+
+        </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg container " aria-label="Main navigation">
+    
+        <div class="navbar-collapse mx-5 " id="navbarsExampleDefault">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ms-1">
+                    <a class="nav-link active my-items" aria-current="page" href="{% url 'shop' %}">Mithai</a>
+                    </li>
+                    <li class="nav-item ms-1">
+                    <a class="nav-link my-items" href="{% url 'shop' %}">Cakes</a>
+                    </li>
+                    <li class="nav-item ms-1">
+                    <a class="nav-link my-items" href="{% url 'shop' %}">Bakery</a>
+                    </li>
+                    <li class="nav-item ms-1">
+                    <a class="nav-link my-items" href="{% url 'shop' %}">Traditional Delight</a>
+                    </li>
+                    <li class="nav-item ms-1">
+                    <a class="nav-link my-items" href="{% url 'shop' %}">Canned Items</a>
+                    </li>
+                    <li class="nav-item ms-1">
+                    <a class="nav-link my-items" href="{% url 'packaging' %}"> Packaging</a>
+                    </li>
+                    <li class="nav-item ms-1 dropdown">
+                    <a class="nav-link my-items dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Cafe</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'menu' %}">Chashni Cafe- DHA Islamabad</a></li>
+                        <li><a class="dropdown-item" href="{% url 'menu' %}">Chashni Cafe- Saddar Rawalpindi</a></li>
+                        <li><a class="dropdown-item" href="{% url 'menu' %}">Chashni Cafe- Faisalabad Cafe Menu</a></li>
+                    </ul>
+                    </li>
+                    <li class="nav-item  ms-1">
+                    <a class="nav-link my-items" href="{% url 'coperate' %}"> Coperate</a>
+                    </li>
+                    <li class="nav-item  ms-1">
+                    <a class="nav-link my-items" href="#"> Bank Account</a>
+                    </li>
+                 
+                        <li class="nav-item ms-1">
+                        <!-- <a class="nav-link dropdown-menu" href="#"> <i class="fa-solid fa-user link-_font"></i></a> -->
+                            <!-- <ul class=""> -->
+                                <!-- <li class="dropdown-item"> -->
+                                    <!-- <a href="{% url 'logout' %}">logout</a> -->
+                                <!-- </li> -->
+                            <!-- </ul> -->
+
+                        
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle nav-btn3 my-items" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
+
+                                {% if user.is_authenticated %}
+                                   
+                                    <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                {% endif %}
+                            </ul>
+
+                            </div>
+                        </li>
+                        <li class="nav-item  ms-1">
+                        <a class="nav-link my-items" href="{% url 'show_cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </li>
+                    </ul>
+                <!-- <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form> -->
+        
+        </div>
+    </nav>
+</div>
+</div>

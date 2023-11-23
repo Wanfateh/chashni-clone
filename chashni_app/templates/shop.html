@@ -1,0 +1,227 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block content %}
+
+    <main>
+        <div class=" container  d-flex justify-content-between mt-5">           
+                <div class=" me-4 mt-4">
+                        <div class="col-lg-3 col-md-12 col-sm-12 filter-results-mobile-responsive all-filters-show-hide-result  margin_top_30 ">
+                            <form action="https://chashni.pk/search" method="GET" name="filters-form" id="filters-form">
+                                <input type="hidden" id="price_range_filter_on_off" value="0">
+                                {% if category_name != '' %}
+                                    Filterd By Category : {{ category_name }}
+                                {% else %}
+                                    Filter By Category
+                                {% endif %}   
+                                <div class="filter-bg-full " style=" ">
+                                
+                                        <div class="" style="padding-bottom: 5px;">
+                                            <h3 class="menu-category">Categories</h3>
+                                        </div>
+                                    
+                                        <div class="filter-count-menu-scroll">
+                                            <ul class="ul-filter">
+                                                {% if categories  %}
+                                                    <li class="li-filter li-div">
+                                                            <input checked="" class="input-filter all-cate-filter" type="checkbox" name="cat_filter[]" id="" value="0">
+                                                            <a href=" {% url 'shop' %}"><span class="span1-filter">All Categories</span>
+                                                            <span class="span2-filter float-right font_size_12">(56)</span></a>
+                                                    </li>
+                                                    {% for category in categories %}
+                                                    
+                                                        <li class="li-filter li-div ">
+                                                            <input id="uncheck-15412" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="15412">
+                                                            <a href="{% url 'category' category.id %}"><span class="span1-filter">{{ category.name }}</span>
+                                                            <span class="span2-filter float-right font_size_12">(11)</span></a>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <!-- <li class="li-filter li-div ">
+                                                    <input id="uncheck-13865" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="13865">
+                                                    <span class="span1-filter">Assorted Sweet Box</span>
+                                                    <span class="span2-filter float-right font_size_12">(5)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12921" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12921">
+                                                    <span class="span1-filter">Premium Sweets</span>
+                                                    <span class="span2-filter float-right font_size_12">(11)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12922" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12922">
+                                                    <span class="span1-filter">Baklawas</span>
+                                                    <span class="span2-filter float-right font_size_12">(7)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12923" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12923">
+                                                    <span class="span1-filter">Kaju Variety</span>
+                                                    <span class="span2-filter float-right font_size_12">(2)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12918" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12918">
+                                                    <span class="span1-filter">Standard Sweets</span>
+                                                    <span class="span2-filter float-right font_size_12">(17)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12919" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12919">
+                                                    <span class="span1-filter">Sugar Free Sweets</span>
+                                                    <span class="span2-filter float-right font_size_12">(2)</span>
+                                                </li>
+                                                <li class="li-filter li-div ">
+                                                    <input id="uncheck-12920" class="input-filter" type="checkbox" data-filter="category" name="cat_filter[]" value="12920">
+                                                    <span class="span1-filter">Ladoo Motichoor Super Special</span>
+                                                    <span class="span2-filter float-right font_size_12">(1)</span>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                            </div>
+                            </form>
+                        
+                        </div>
+                </div>
+                <div  class="container  pe-5">
+                    <div class="d-flex flex-wrap ">
+                        {% if categories %}
+                            {% for category in categories %}
+                                <h1>{{category.name}} </h1>
+                                {% for product in category.product_set.all %}
+                                    <div class="d-flex ">                   
+                                        <div class="card mx-2 my-4 h-80" style="width: 14rem;">
+                                            <a href="{% url 'product_detail' product.id %}"><img  class="lazy card-img-top " src="{{ product.image.url }}" data-index="229154" alt=""></a>
+                                            <div class="card-body">
+                                            <h6 class="card-title">{{ product.name }}
+                                                <span class="section-span">(1kg)</span>
+                                            </h6>
+                                            <p class="card-text">$ {{ product.price }}</p>
+                                            <a href="{% url 'product_detail' product.id %}" class="btn section-btn">Add to Cart</a>
+                                            </div>
+                                        </div> 
+                                    </div> 
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                        <!-- {% if products %}
+                            {% for product in products %}
+                                <div class="d-flex ">                   
+                                    <div class="card mx-2 my-4 h-80" style="width: 14rem;">
+                                        <a href="{% url 'product_detail' product.id %}"><img  class="lazy card-img-top " src="{{ product.image.url }}" data-index="229154" alt=""></a>
+                                        <div class="card-body">
+                                        <h6 class="card-title">{{ product.name }}
+                                            <span class="section-span">(1kg)</span>
+                                        </h6>
+                                        <p class="card-text">{{ product.price }}</p>
+                                        <a href="{% url 'product_detail' product.id %}" class="btn section-btn">Add to Cart</a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                            {% endfor %}
+                        {% endif %} -->
+                        <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button> -->
+    
+    <!-- Modal -->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            ...
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div> -->
+                            <!-- <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>  
+                            <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>   -->
+                        <!-- </div> -->
+                        <!-- <div class="d-flex"> -->
+                            <!-- <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>  
+                            <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>   -->
+                        <!-- </div>
+                        <div class="d-flex"> -->
+                            <!-- <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>  
+                            <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>  
+                            <div class="card mx-2 my-4" style="width: 14rem;">
+                                <a href=""><img style=" object-fit: cover;height: 235; " class="lazy card-img-top " data-src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" src="https://static.tossdown.com/images/235/a751717a-0f01-4d1c-93aa-cabe8b89f13a.webp" data-index="229154" alt=""></a>
+                                <div class="card-body">
+                                <h5 class="card-title">Premium Eid Gift Basket
+                                    <span class="section-span">(1kg)</span>
+                                </h5>
+                                <p class="card-text">PKR 5245</p>
+                                <a href="#" class="btn section-btn">Add to Cart</a>
+                                </div>
+                            </div>   -->
+                        <!-- </div> -->
+
+                </div>
+            
+                
+            
+            
+        </div>
+            
+    </main>
+
+{% endblock %}
