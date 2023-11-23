@@ -1,0 +1,2 @@
+python manage.py seed api --number=15
+to use django seed
